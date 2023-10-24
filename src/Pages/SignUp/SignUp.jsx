@@ -2,11 +2,50 @@ import { Link } from "react-router-dom";
 import { FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import img from '../../assets/images/login/login.svg'
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
+    const { createUser } = useContext(AuthContext)
 
     const handleSignUp = (e) => {
         e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        createUser(email, password)
+            .then((result) => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Sign Up successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+                updateProfile(result.user, {
+                    displayName: name
+                })
+                .then()
+                .catch(error => {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: `${error.message}`,
+                        icon: 'error',
+                        confirmButtonText: 'Cancel'
+                    })
+                })
+                console.log(result.user);
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: `${error.message}`,
+                    icon: 'error',
+                    confirmButtonText: 'Cancel'
+                })
+            })
     }
     return (
         <div className="hero min-h-screen bg-base-200">
