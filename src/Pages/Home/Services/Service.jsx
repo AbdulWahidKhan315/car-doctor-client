@@ -1,4 +1,4 @@
-
+import { AiOutlineArrowRight } from 'react-icons/ai';
 const Service = ({ service }) => {
     const { title, img, price } = service;
     return (
@@ -8,7 +8,7 @@ const Service = ({ service }) => {
                 <h2 className="card-title">{title}</h2>
                 <p className="text-[#FF3811] font-bold">Price: ${price}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
+                    <button className="text-xl text-[#FF3811]"><AiOutlineArrowRight></AiOutlineArrowRight></button>
                 </div>
             </div>
         </div>

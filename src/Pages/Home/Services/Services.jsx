@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import Service from "./Service";
 
 const Services = () => {
-    const [services,setServices]=useState([]);
+    const [services, setServices] = useState([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         fetch('/services.json')
-        .then(res => res.json())
-        .then(data => setServices(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setServices(data))
+    }, [])
     return (
         <div>
             <div className="text-center space-y-5 mt-4">
@@ -19,10 +19,13 @@ const Services = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
                 {
                     services.map(service => <Service
-                    key={service._id}
-                    service={service}
+                        key={service._id}
+                        service={service}
                     ></Service>)
                 }
+            </div>
+            <div className="text-center mt-4">
+                <button className="btn btn-outline btn-secondary">More Services</button>
             </div>
         </div>
     );
