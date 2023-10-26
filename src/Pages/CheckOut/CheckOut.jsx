@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const CheckOut = () => {
     const {user}=useContext(AuthContext)
     const service = useLoaderData();
-    const {  _id, title, price } = service;
+    const {  _id, title, price, img } = service;
 
     const handleBook = (e) => {
         e.preventDefault();
@@ -22,6 +22,7 @@ const CheckOut = () => {
             date,
             email,
             amount,
+            img,
             service_title: title,
             service_id: _id,
             phone,
@@ -51,6 +52,7 @@ const CheckOut = () => {
         <div>
             <h1 className="text-center text-2xl font-bold">Servie Name: {title}</h1>
             <h1 className="text-center text-2xl font-bold">Service Price: {price}</h1>
+            <img className="w-20 h-20 rounded-full mx-auto" src={img} alt="" />
             <div>
                 <div className="card shadow-2xl bg-base-100">
                     <form className="card-body" onSubmit={handleBook}>

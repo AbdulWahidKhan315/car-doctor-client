@@ -36,7 +36,6 @@ const SignUp = () => {
                         confirmButtonText: 'Cancel'
                     })
                 })
-                console.log(result.user);
             })
             .catch(error => {
                 Swal.fire({
