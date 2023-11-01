@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import {  useContext, useEffect, useState } from "react";
 import Service from "./Service";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const Services = () => {
+    const {loading}=useContext(AuthContext)
     const [services, setServices] = useState([]);
 
     useEffect(() => {
@@ -18,7 +20,7 @@ const Services = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
                 {
-                    services.map(service => <Service
+                    loading?<span className="loading loading-spinner text-secondary"></span>: services.map(service => <Service
                         key={service._id}
                         service={service}
                     ></Service>)
