@@ -1,6 +1,6 @@
 import { FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
@@ -8,6 +8,8 @@ import Swal from 'sweetalert2';
 
 const Login = () => {
     const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
     const handleLogin = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -21,6 +23,7 @@ const Login = () => {
                     icon: 'success',
                     confirmButtonText: 'Ok'
                 })
+                navigate(location?.state ? location.state : '/');
             })
             .catch(error => {
                 Swal.fire({

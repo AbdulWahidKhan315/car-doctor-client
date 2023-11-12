@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
-import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Booking = () => {
     const { user } = useContext(AuthContext);
     const [bookings, setBookings] = useState([]);
+    const axiosSecure = useAxiosSecure();
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -65,15 +66,19 @@ const Booking = () => {
 
     useEffect(() => {
 
-        axios.get(`http://localhost:5000/bookings?email=${user?.email}`,{withCredentials: true})
+        axiosSecure.get(`/bookings?email=${user?.email}`)
         .then(res=>{
             setBookings(res.data)
         })
+        // axios.get(`http://localhost:5000/bookings?email=${user?.email}`,{withCredentials: true})
+        // .then(res=>{
+        //     setBookings(res.data)
+        // })
 
         // fetch(`http://localhost:5000/bookings?email=${user?.email}`)
         //     .then(res => res.json())
         //     .then(data => setBookings(data))
-    }, [])
+    }, [axiosSecure,user?.email])
     return (
         <div>
             <h2 className="text-3xl">Your bookings: {bookings.length}</h2>

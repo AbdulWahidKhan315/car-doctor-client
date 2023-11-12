@@ -44,14 +44,14 @@ const AuthProvider = ({children}) => {
             }else{
                 axios.post('http://localhost:5000/logout',loggedUser,{withCredentials: true})
                 .then(res => {
-                    console.log(res.data);
+                    console.log(res.data)
                 })
             }
         })
         return ()=>{
             unsubscribe();
         }
-    },[])
+    },[user])
 
     const authInfo = {
         user,
